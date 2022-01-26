@@ -9,7 +9,7 @@ from pexels_api import API
 load_dotenv()
 api = API(os.getenv('pexel_api_key'))
 in_holidays = holidays.IN()
-holiday = holidays.get(datetime.datetime.now().strftime("%d-%m-%Y"))
+holiday = in_holidays.get(datetime.datetime.now().strftime("%d-%m-%Y"))
 
 time = datetime.datetime.now().hour
 timed = 'Night'
@@ -24,15 +24,19 @@ elif 12 < time < 16:
 with open("content.yml", 'r') as stream:
     data = yaml.safe_load(stream)
 
-genre = data['genre'][randrange(len(data['genre']))]
-search = genre
-
-if genre == "TIMELY":
-    search = timed
+if holiday:
+    search = holiday
+    genre = 'HOLIDAY'
+else:
+    genre = data['genre'][randrange(len(data['genre']))]
+    search = genre
+    if genre == "TIMELY":
+        search = timed
 
 
 def getImage():
     api.search(search, page=randrange(1, 10), results_per_page=5)
+    print(search)
     photos = api.get_entries()
     return photos[randrange(len(photos))].large
 

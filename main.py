@@ -17,8 +17,11 @@ image_editable = ImageDraw.Draw(img)
 
 for i,text in enumerate(title_text):
     w, h = image_editable.textsize(text, font=title_font)
+    p_hor, p_ver = (img.width-w)/2, ((img.height-h)/3.5)+i*45
+    # if i > 0:
+    #     p_ver = (img.height-h)/i*i
     image_editable.text(
-        ((img.width-w)/2, ((img.height-h)/2)*1+i),
+        (p_hor, p_ver),
         text,
         (237, 230, 211),
         stroke_width=10,
