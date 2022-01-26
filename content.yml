@@ -1,0 +1,40 @@
+genre:
+  - "Nature"
+  - "Sun"
+  - "kids"
+  - "city"
+  - "Monsoon"
+  - "life"
+  - "motivation"
+  - "TIMELY"
+
+TEXT:
+  QUOTES:
+    - "“In three words I can sum up everything I've learned about life: it goes on.”
+       ― Robert Frost"
+    - "“If you want to know what a man's like, take a good look at how he treats his inferiors, not his equals.”
+       ― J.K. Rowling, Harry Potter and the Goblet of Fire"
+    - "“Don’t walk in front of me… I may not follow
+       Don’t walk behind me I may not lead
+       Walk beside me… just be my friend”
+       ― Albert Camus"
+    - "“If you tell the truth, you don't have to remember anything.”
+       ― Mark Twain"
+  TIMELY:
+    Morning:
+      - "Good Morning"
+      - "गुड मॉर्निंग !"
+      - "तुमचा दिवस चांगला जावो"
+    Afternoon:
+      - "Good Afternoon"
+      - "Have a wonderful day"
+      - "Good Day"
+      - "आपका दिन शुभ हो"
+      - "Have a very good Afternoon"
+      - "Good Evening"
+      - "तुमचा दिवस चांगला जावो"
+    Night:
+      - "Good Night"
+      - "गुड इवनिंग"
+      - "गुड नाईट"
+      - "शुभ रात्रि"
