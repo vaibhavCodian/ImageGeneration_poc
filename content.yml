@@ -7,8 +7,16 @@ genre:
   - "life"
   - "motivation"
   - "TIMELY"
+  - "HOLIDAY"
 
 TEXT:
+  HOLIDAY:
+    - "Happy %s"
+    - "Wish you a very happy %s"
+    - "आपको %s की बोहोत बोहोत  शुभ कामनायें"
+    - "आपको %s की बोहोत बोहोत  शुभ कामनायें"
+    - "आपको %s की बोहोत बोहोत  शुभ कामनायें"
+    - "आपको %s की बोहोत बोहोत  शुभ कामनायें"
   QUOTES:
     - "“In three words I can sum up everything I've learned about life: it goes on.”
        ― Robert Frost"
@@ -38,3 +46,21 @@ TEXT:
       - "गुड इवनिंग"
       - "गुड नाईट"
       - "शुभ रात्रि"
+CONF:
+  Colors:
+    - "#2c3e50"
+    - "#27ae60"
+    - "#3498db"
+    - "#1abc9c"
+    - "#f1c40f"
+    - "#d35400"
+    - "#000000"
+    - "#000000"
+  Fonts:
+    - Hind
+    - Kalam
+    - Karma
+    - Laila
+    - Teko
+    - Tillana
+
