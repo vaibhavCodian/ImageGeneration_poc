@@ -1,7 +1,12 @@
 import datetime
 import os
+import random
+from io import BytesIO
 
-from PIL import Image
+import PIL.ImageEnhance
+import requests
+from PIL import Image, ImageEnhance
+from PIL.ImageFilter import EDGE_ENHANCE
 from dotenv import load_dotenv
 from random import randrange
 import yaml
@@ -10,10 +15,8 @@ from pexels_api import API
 
 load_dotenv()
 api = API(os.getenv('pexel_api_key'))
-in_holidays = holidays.IN()
-holiday = in_holidays.get(datetime.datetime.now().strftime("%d-%m-%Y"))
 
-img_watermark = Image.open('../watermark1.png')
+img_watermark = Image.open('watermark1.png')
 
 time = datetime.datetime.now().hour
 timed = 'Night'
@@ -25,34 +28,47 @@ elif 12 < time < 16:
 
 # print(datetime.datetime.now().strftime("%d-%m-%Y") in in_holidays)
 
-with open("../content.yml", 'r') as stream:
+with open("content.yml", 'r') as stream:
     data = yaml.safe_load(stream)
 
-if holiday:
-    search = "india "+holiday
-    genre = 'HOLIDAY'
-else:
-    genre = data['genre'][randrange(len(data['genre']))]
-    search = genre
-    if genre == "TIMELY":
-        search = timed
 
-    # if genre == "HOLIDAY":
-    #     search = holiday_name
+def getData():
+    return data
 
 
-def getImage():
+#
+
+def getImage(genre, holiday=None):
+    if genre == "HOLIDAY" and holiday is not None:
+        search = "india "+holiday
+    else:
+        genre = data['genre'][randrange(len(data['genre']))]
+        search = genre
+        if genre == "TIMELY":
+            search = timed
+        else:
+            search = genre
+
+    print("[D] search: "+search)
+
     api.search(search, page=randrange(1, 10), results_per_page=10)
-    print(search)
+
     photos = api.get_entries()
-    return photos[randrange(len(photos))].large
+    url = photos[randrange(len(photos))].large
+    img = Image.open(BytesIO(requests.get(url).content))
+    img_size = randrange(min(img.width, img.height), 700)
 
+    # OPTIMIZING IMAGE
+    img.thumbnail((img_size, img_size), Image.ANTIALIAS)
+    img = img.filter(EDGE_ENHANCE)
+    img = ImageEnhance.Contrast(img).enhance(random.uniform(0, 0.8))
+    return img
 
-def getText():
-    print("genre: "+genre)
+def getText(genre, holiday=None):
+    print("genre: ",genre)
     if genre == 'TIMELY':
         texts = data['TEXT'][genre][timed]
-    elif genre == 'HOLIDAY':
+    elif genre == 'HOLIDAY' and holiday is not None:
         texts = data['TEXT']['HOLIDAY']
         return texts[randrange(len(texts))] % holiday
     else:
